@@ -1,6 +1,5 @@
-const {getDefaultConfig, mergeConfig} = require('@react-native/metro-config');
-
-const {wrapWithReanimatedMetroConfig} = require('react-native-reanimated/metro-config');
+const { getDefaultConfig, mergeConfig } = require("@react-native/metro-config");
+const { wrapWithReanimatedMetroConfig } = require("react-native-reanimated/metro-config");
 const { withNativeWind } = require("nativewind/metro");
 
 /**
@@ -9,10 +8,10 @@ const { withNativeWind } = require("nativewind/metro");
  *
  * @type {import('@react-native/metro-config').MetroConfig}
  */
-const config = {};
+const defaultConfig = getDefaultConfig(__dirname);
+const mergedConfig = mergeConfig(defaultConfig, {}); // Merging with an empty object is redundant but keeps the structure clear
 
-const mergedDefault = mergeConfig(getDefaultConfig(__dirname), config);
+const windWrappedConfig = withNativeWind(mergedConfig, { input: "./global.css" });
+const reanimatedWrappedConfig = wrapWithReanimatedMetroConfig(windWrappedConfig);
 
-const windWrappedConf = withNativeWind(mergedDefault, { input: "./global.css" });
-
-module.exports = mergeConfig(wrapWithReanimatedMetroConfig(config), windWrappedConf);
+module.exports = reanimatedWrappedConfig;

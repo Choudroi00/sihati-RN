@@ -1,35 +1,30 @@
-import { remapProps } from "nativewind";
-import { PressableProps } from "react-native";
-import { View } from "react-native-reanimated/lib/typescript/Animated";
+import { Pressable, PressableProps } from "react-native";
+import { primaryColor, primaryRadius, secondaryColor } from "../../utils/constants";
 
 
 
 interface XButtonProps extends PressableProps {
-    variant?: string;
+    variant?: keyof typeof XButtonVariants;
 }
 
 
 const XButtonVariants = {
-    primary: {
-        backgroundColor: 'blue',
-    },
-    secondary: {
-        backgroundColor: 'green',
-    },
-    ghost: {
-        backgroundColor: 'red',
-    },
+    base: ` flex items-center justify-center px-8 py-4 text-white font-medium text-md ${primaryRadius} `,
+    primary: '',
+    secondary: ` bg-[${secondaryColor}] `,
+    ghost: '',
+    default: ` bg-[${primaryColor}] `,
 }
 
 
 
 
-const XButton = () => {
+const XButton = (props : XButtonProps) => {
     
     return (
-        <View className="" >
-
-        </View>
+        <Pressable {...props} className={`${XButtonVariants.base} ${XButtonVariants[props.variant ?? 'default']} ${props.className}`} >
+            { props.children }
+        </Pressable>
     )
 }
 

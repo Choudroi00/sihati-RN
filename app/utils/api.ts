@@ -1,9 +1,20 @@
-import axios from "axios";
+import axios, { AxiosRequestConfig, InternalAxiosRequestConfig } from "axios";
+import { API_URL } from "./constants";
 
 
 const apiClient = axios.create({
-    baseURL: 'https://api.example.com',
-    headers: {
-        'Authorization': 'Bearer YOUR_API_TOKEN',
-    },
+    baseURL: API_URL,
 })
+
+apiClient.interceptors.request.use((config) => {
+    return {
+        ...config,
+        headers: {
+            ...config.headers,
+            'Authorization': `Bearer ${localStorage.getItem('token')}`,
+            'Content-Type': 'application/json',
+        },
+    } as InternalAxiosRequestConfig
+})
+
+export default apiClient;

@@ -5,7 +5,7 @@ import { Icon, IconNode, View } from "lucide-react-native";
 
 interface XInputProps extends TextInputProps {
     variant?: keyof typeof XInputVariants;
-    icon: IconNode
+    icon?: IconNode
     
 }   
 
@@ -21,10 +21,12 @@ export default function XInput(props : XInputProps) {
     
     return (
         <View className={`${XInputVariants.base} flex flex-row justify-center items-center ${XInputVariants[props.variant ?? 'default']} gap-4 overflow-hidden `} >
-            <Icon iconNode={props.icon} color={'black'} size={24} ></Icon>
+            {props.icon && <Icon iconNode={props.icon} color={'black'} size={24} ></Icon> }
             <TextInput {...props} className={`h-full flex-1 focus:outline-none focus:ring-primary-500 focus:border-primary-500 text-gray-800 text-sm font-medium`} >
 
             </TextInput>
         </View>
     )
 }
+
+

@@ -28,3 +28,5 @@ const XButton = (props : XButtonProps) => {
     )
 }
 
+export default XButton;
+

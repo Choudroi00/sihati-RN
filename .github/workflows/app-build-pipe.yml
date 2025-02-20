@@ -41,7 +41,7 @@ jobs:
 
         - name: Build Android APK
           run: |
-            docker run --rm -v $(pwd):/app react-native-android bash -c "chmod +x ./gradlew && ./gradlew assembleRelease"
+            docker run --rm -v $(pwd):/app react-native-android bash -c "cd android && chmod +x ./gradlew && ./gradlew assembleRelease"
 
 
         - name: DebugBuild Android APK

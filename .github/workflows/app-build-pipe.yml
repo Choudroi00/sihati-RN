@@ -35,25 +35,25 @@ jobs:
             key: ${{ runner.os }}-gradle-${{ hashFiles('**/*.gradle*', '**/gradle-wrapper.properties') }}
             restore-keys: |
               ${{ runner.os }}-gradle-
-        - name: Build Docker 
-          run: |
-            docker build -t react-native-android .
-            
-        - name: Build Android APK
-          run: |
-            cd android && chmod +x ./gradlew && ./gradlew assembleRelease
+        # - name: Build Docker 
+        #   run: |
+        #     docker build -t react-native-android .
+
+        # - name: Build Android APK
+        #   run: |
+        #     cd android && chmod +x ./gradlew && ./gradlew assembleRelease
 
         - name: DebugBuild Android APK
           run: |
             cd android && chmod +x ./gradlew && ./gradlew assembleDebug
   
   
-        - name: Upload APK as an artifact
-          uses: actions/upload-artifact@v4
-          with:
-            name: android-apk
-            path: android/app/build/outputs/apk/release/app-release.apk
-            compression-level: 9
+        # - name: Upload APK as an artifact
+        #   uses: actions/upload-artifact@v4
+        #   with:
+        #     name: android-apk
+        #     path: android/app/build/outputs/apk/release/app-release.apk
+        #     compression-level: 9
         - name: Upload DebugAPK as an artifact
           uses: actions/upload-artifact@v4
           with:
